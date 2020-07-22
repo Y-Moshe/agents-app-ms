@@ -1,0 +1,14 @@
+<nav class="bg-primary">
+  <ul class="nav">
+    <li
+      class="nav-item"
+      *ngFor="let link of links">
+      <a
+        class="nav-link link"
+        routerLinkActive="active"
+        [routerLink]="link.url">
+        {{link.name}}
+      </a>
+    </li>
+  </ul>
+</nav>
