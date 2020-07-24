@@ -6,6 +6,7 @@
       <a
         class="nav-link link"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="link.url">
         {{link.name}}
       </a>
