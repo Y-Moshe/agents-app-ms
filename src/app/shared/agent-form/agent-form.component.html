@@ -1,1 +1,165 @@
-<p>agent-form works!</p>
+<div class="container">
+  <form
+    dir="rtl"
+    (ngSubmit)="handleSubmit()"
+    [formGroup]="form">
+    <mat-form-field class="w-100">
+      <input
+        formControlName="name"
+        maxlength="45"
+        matInput
+        placeholder="שם">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input
+        formControlName="imgURL"
+        maxlength="250"
+        matInput
+        placeholder="תמונה (לינק בלבד)">
+    </mat-form-field>
+    <div class="img-preview" *ngIf="form.get('imgURL').value">
+      <img
+        [src]="form.get('imgURL').value"
+        alt="preview"
+        class="img-fluid">
+    </div>
+    <mat-form-field class="w-100">
+      <input
+        formControlName="role"
+        maxlength="45"
+        matInput
+        placeholder="תפקיד">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input
+        formControlName="biography"
+        maxlength="300"
+        matInput
+        placeholder="ביוגרפיה">
+    </mat-form-field>
+    <div class="container"
+        formGroupName="abilities">
+      <h3 class="text-primary text-right">יכולות</h3>
+      <hr />
+      <div class="row">
+        <div class="col-6"
+            formGroupName="abilityQ">
+          <mat-form-field class="w-100">
+            <input
+              formControlName="name"
+              matInput
+              placeholder="יכולת ה- Q">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="description"
+              matInput
+              placeholder="תיאור">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="image"
+              matInput
+              placeholder="תמונה (לינק בלבד)">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="videoURL"
+              matInput
+              placeholder="תסריט MP4 (לינק בלבד)">
+          </mat-form-field>
+        </div>
+        <div class="col-6"
+            formGroupName="abilityE">
+          <mat-form-field class="w-100">
+            <input
+              formControlName="name"
+              matInput
+              placeholder="יכולת ה- E">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="description"
+              matInput
+              placeholder="תיאור">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="image"
+              matInput
+              placeholder="תמונה (לינק בלבד)">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="videoURL"
+              matInput
+              placeholder="תסריט MP4 (לינק בלבד)">
+          </mat-form-field>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-6"
+            formGroupName="abilityC">
+          <mat-form-field class="w-100">
+            <input
+              formControlName="name"
+              matInput
+              placeholder="יכולת ה- C">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="description"
+              matInput
+              placeholder="תיאור">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="image"
+              matInput
+              placeholder="תמונה (לינק בלבד)">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="videoURL"
+              matInput
+              placeholder="תסריט MP4 (לינק בלבד)">
+          </mat-form-field>
+        </div>
+        <div class="col-6"
+            formGroupName="abilityX">
+          <mat-form-field class="w-100">
+            <input
+              formControlName="name"
+              matInput
+              placeholder="יכולת ה- X">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="description"
+              matInput
+              placeholder="תיאור">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="image"
+              matInput
+              placeholder="תמונה (לינק בלבד)">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              formControlName="videoURL"
+              matInput
+              placeholder="תסריט MP4 (לינק בלבד)">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button
+      [disabled]="form.invalid"
+      mat-raised-button
+      class="w-100"
+      type="submit">Save</button>
+  </form>
+</div>

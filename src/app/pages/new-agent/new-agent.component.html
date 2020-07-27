@@ -1,2 +1,5 @@
-<p>new-agent works!</p>
-<app-agent-form></app-agent-form>
+<div class="container p-4">
+  <h1 class="text-success">NEW AGENT</h1>
+  <app-agent-form
+    (formSubmit)="handleSubmit($event)"></app-agent-form>
+</div>

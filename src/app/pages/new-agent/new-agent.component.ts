@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-agent.component.scss']
 })
 export class NewAgentComponent implements OnInit {
+  isLoading = false;
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  handleSubmit(form: any): void {
+    this.isLoading = true;
   }
 
 }
