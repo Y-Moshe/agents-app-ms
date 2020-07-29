@@ -8,7 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AgentFormComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<{}>();
-  @Input() data?: any;
+  @Input() formData?: any;
+  @Input() isLoading = false;
 
   form: FormGroup;
 
@@ -17,34 +18,34 @@ export class AgentFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
-      imgURL: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      role: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
-      biography: new FormControl(null, [Validators.required, Validators.maxLength(300)]),
+      name: new FormControl(this.formData?.name, [Validators.required, Validators.maxLength(45)]),
+      imgURL: new FormControl(this.formData?.imgURL, [Validators.required, Validators.maxLength(250)]),
+      role: new FormControl(this.formData?.role, [Validators.required, Validators.maxLength(45)]),
+      biography: new FormControl(this.formData?.biography, [Validators.required, Validators.maxLength(300)]),
       abilities: new FormGroup({
         abilityQ: new FormGroup({
-          name: new FormControl(null),
-          description: new FormControl(null),
-          image: new FormControl(null),
-          videoURL: new FormControl(null)
+          name: new FormControl(this.formData?.abilities[0]?.name),
+          description: new FormControl(this.formData?.abilities[0]?.description),
+          image: new FormControl(this.formData?.abilities[0]?.image),
+          videoURL: new FormControl(this.formData?.abilities[0]?.videoURL)
         }),
         abilityE: new FormGroup({
-          name: new FormControl(null),
-          description: new FormControl(null),
-          image: new FormControl(null),
-          videoURL: new FormControl(null)
+          name: new FormControl(this.formData?.abilities[1]?.name),
+          description: new FormControl(this.formData?.abilities[1]?.description),
+          image: new FormControl(this.formData?.abilities[1]?.image),
+          videoURL: new FormControl(this.formData?.abilities[1]?.videoURL)
         }),
         abilityC: new FormGroup({
-          name: new FormControl(null),
-          description: new FormControl(null),
-          image: new FormControl(null),
-          videoURL: new FormControl(null)
+          name: new FormControl(this.formData?.abilities[2]?.name),
+          description: new FormControl(this.formData?.abilities[2]?.description),
+          image: new FormControl(this.formData?.abilities[2]?.image),
+          videoURL: new FormControl(this.formData?.abilities[2]?.videoURL)
         }),
         abilityX: new FormGroup({
-          name: new FormControl(null),
-          description: new FormControl(null),
-          image: new FormControl(null),
-          videoURL: new FormControl(null)
+          name: new FormControl(this.formData?.abilities[3]?.name),
+          description: new FormControl(this.formData?.abilities[3]?.description),
+          image: new FormControl(this.formData?.abilities[3]?.image),
+          videoURL: new FormControl(this.formData?.abilities[3]?.videoURL)
         })
       })
     });
@@ -52,7 +53,7 @@ export class AgentFormComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid && this.isLoading) {
       return;
     }
 

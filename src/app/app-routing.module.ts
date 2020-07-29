@@ -16,7 +16,7 @@ const routes: Routes = [
     component: NewAgentComponent
   },
   {
-    path: 'agents/edit/:agent',
+    path: 'agents/edit/:id',
     component: EditAgentComponent
   },
   {
