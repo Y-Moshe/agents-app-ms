@@ -19,12 +19,12 @@
         matInput
         placeholder="תמונה (לינק בלבד)">
     </mat-form-field>
-    <div class="img-preview" *ngIf="form.get('imgURL').value">
-      <img
-        [src]="form.get('imgURL').value"
-        alt="preview"
-        class="img-fluid">
-    </div>
+    <app-img-preview
+      [width]="200"
+      [height]="200"
+      [in]="form.get('imgURL').value"
+      [src]="form.get('imgURL').value">
+    </app-img-preview>
     <mat-form-field class="w-100">
       <input
         formControlName="role"
@@ -66,6 +66,12 @@
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <app-img-preview
+            [width]="100"
+            [height]="100"
+            [in]="form.get('abilities.abilityQ.image').value"
+            [src]="form.get('abilities.abilityQ.image').value">
+          </app-img-preview>
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -93,6 +99,12 @@
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <app-img-preview
+            [width]="100"
+            [height]="100"
+            [in]="form.get('abilities.abilityE.image').value"
+            [src]="form.get('abilities.abilityE.image').value">
+          </app-img-preview>
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -123,6 +135,12 @@
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <app-img-preview
+            [width]="100"
+            [height]="100"
+            [in]="form.get('abilities.abilityC.image').value"
+            [src]="form.get('abilities.abilityC.image').value">
+          </app-img-preview>
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -150,6 +168,12 @@
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <app-img-preview
+            [width]="100"
+            [height]="100"
+            [in]="form.get('abilities.abilityX.image').value"
+            [src]="form.get('abilities.abilityX.image').value">
+          </app-img-preview>
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -167,11 +191,20 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <button
-      [disabled]="form.invalid"
-      *ngIf="!isLoading"
-      mat-raised-button
-      class="w-100"
-      type="submit">Save</button>
+    <div *ngIf="!isLoading" class="d-flex justify-content-between">
+      <button
+        [disabled]="form.invalid"
+        *ngIf="!isLoading"
+        mat-raised-button
+        class="w-25"
+        type="submit">Save</button>
+      <button
+        [disabled]="form.invalid"
+        *ngIf="!isLoading"
+        mat-raised-button
+        color="warn"
+        class="w-25"
+        type="submit">Reset All</button>
+    </div>
   </form>
 </div>

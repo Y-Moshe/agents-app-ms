@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AgentFormComponent } from './agent-form/agent-form.component';
 import { AngularMaterialModule } from '../angular-material.module';
+import { ImgPreviewComponent } from './img-preview/img-preview.component';
 
 @NgModule({
   declarations: [
-    AgentFormComponent
+    AgentFormComponent,
+    ImgPreviewComponent
   ],
   imports: [
     CommonModule,

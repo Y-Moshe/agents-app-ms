@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AgentsService } from '../../services/agents.service';
 
@@ -8,29 +9,38 @@ import { AgentsService } from '../../services/agents.service';
   templateUrl: './new-agent.component.html',
   styleUrls: ['./new-agent.component.scss']
 })
-export class NewAgentComponent implements OnInit {
+export class NewAgentComponent {
   isLoading = false;
-  message: string;
 
   constructor(
-    private agentsService: AgentsService
+    private agentsService: AgentsService,
+    private snackBar: MatSnackBar
   ) { }
-
-  ngOnInit(): void {
-  }
 
   handleSubmit(form: any): void {
     this.isLoading = true;
-    this.message = null;
 
-    console.log(form);
-
-    this.agentsService.add(form).then(res => {
-      this.message = res.message;
+    this.agentsService.add(form).then(message => {
+      this.setAlert('success', message);
     }).catch((err: HttpErrorResponse) => {
-      this.message = err.message;
+      let msg = err.message;
+      if (err.error.error?.message) {
+        msg = err.error.error?.message;
+      }
+
+      this.setAlert('danger', msg);
     }).finally(() => {
       this.isLoading = false;
+    });
+  }
+
+  private setAlert(status: 'success' | 'danger', message: string): void {
+    this.snackBar.open(message, 'Close', {
+      panelClass: [
+        'text-white',
+        status === 'success' ? 'bg-success' : 'bg-danger'
+      ],
+      duration: 3000
     });
   }
 

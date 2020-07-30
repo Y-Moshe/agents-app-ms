@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AgentsService } from 'src/app/services/agents.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-agent',
@@ -17,7 +18,8 @@ export class EditAgentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private agentsService: AgentsService
+    private agentsService: AgentsService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +27,16 @@ export class EditAgentComponent implements OnInit {
     this.id = +this.route.snapshot.params.id;
 
     this.agentsService.getOne(this.id).then(res => {
+      console.log(res);
       this.formData = res;
+
     }).catch((err: HttpErrorResponse) => {
-      this.message = err.message;
+      let msg = err.message;
+      if (err.error.error.message) {
+        msg = err.error.error.message;
+      }
+
+      this.setAlert('danger', msg);
     }).finally(() => {
       this.isLoading = false;
     });
@@ -37,12 +46,28 @@ export class EditAgentComponent implements OnInit {
     this.isLoading = true;
     this.message = null;
 
-    this.agentsService.edit(this.id, form).then(res => {
-      this.message = res.message;
+    this.agentsService.edit(this.id, form).then(message => {
+      this.setAlert('success', message);
+
     }).catch((err: HttpErrorResponse) => {
-      this.message = err.message;
+      let msg = err.message;
+      if (err.error.error?.message) {
+        msg = err.error.error?.message;
+      }
+
+      this.setAlert('danger', msg);
     }).finally(() => {
       this.isLoading = false;
+    });
+  }
+
+  private setAlert(status: 'success' | 'danger', message: string): void {
+    this.snackBar.open(message, 'Close', {
+      panelClass: [
+        'text-white',
+        status === 'success' ? 'bg-success' : 'bg-danger'
+      ],
+      duration: 3000
     });
   }
 

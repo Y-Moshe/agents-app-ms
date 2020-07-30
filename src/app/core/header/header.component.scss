@@ -1,5 +1,6 @@
 nav {
   height: 50px;
+  background: linear-gradient(black, transparent);
 
   ul {
     height: 100%;
@@ -14,10 +15,10 @@ nav {
   transition-duration: 300ms;
 
   &:hover {
-    text-shadow: 0 0 8px black;
+    text-shadow: 0 0 8px green;
   }
 }
 
 .active {
-  text-shadow: 0 0 8px black;
+  text-shadow: 0 0 8px green;
 }

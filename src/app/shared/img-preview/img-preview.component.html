@@ -1,0 +1,17 @@
+<div [ngSwitch]="in">
+  <div class="d-flex" *ngSwitchCase="true">
+    <img
+      [src]="src"
+      alt="preview"
+      [style]="
+      'width: '.concat(width, 'px;',
+      'height: ', height, 'px;')"
+      class="img-fluid m-auto">
+  </div>
+  <div
+    *ngSwitchCase="false"
+    [style]="
+      'width: '.concat(width, 'px;',
+      'height: ', height, 'px;')">
+  </div>
+</div>

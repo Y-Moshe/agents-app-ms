@@ -16,7 +16,7 @@ export class AgentsService {
   }
 
   getOne(id: number): Promise<any> {
-    return this.http.get(api.concat('/agents/', id.toString())).toPromise();
+    return this.http.get(api.concat('/', id.toString())).toPromise();
   }
 
   add(data: any): Promise<any> {
@@ -24,10 +24,10 @@ export class AgentsService {
   }
 
   edit(id: number, data: any): Promise<any> {
-    return this.http.patch(api.concat('/agents/', id.toString()), data).toPromise();
+    return this.http.patch(api.concat('/', id.toString()), data).toPromise();
   }
 
   delete(id: number): Promise<any> {
-    return this.http.delete(api.concat('/agents/', id.toString())).toPromise();
+    return this.http.delete(api.concat('/', id.toString())).toPromise();
   }
 }
