@@ -31,10 +31,7 @@ export class EditAgentComponent implements OnInit {
       this.formData = res;
 
     }).catch((err: HttpErrorResponse) => {
-      let msg = err.message;
-      if (err.error.error.message) {
-        msg = err.error.error.message;
-      }
+      const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
     }).finally(() => {
@@ -50,10 +47,7 @@ export class EditAgentComponent implements OnInit {
       this.setAlert('success', message);
 
     }).catch((err: HttpErrorResponse) => {
-      let msg = err.message;
-      if (err.error.error?.message) {
-        msg = err.error.error?.message;
-      }
+      const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
     }).finally(() => {

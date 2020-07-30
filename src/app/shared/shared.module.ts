@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AgentFormComponent } from './agent-form/agent-form.component';
 import { AngularMaterialModule } from '../angular-material.module';
-import { ImgPreviewComponent } from './img-preview/img-preview.component';
+import { ImgPreviewComponent } from './agent-form/img-preview/img-preview.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { ImgPreviewComponent } from './img-preview/img-preview.component';
     ReactiveFormsModule
   ],
   exports: [
-    AgentFormComponent
+    AgentFormComponent,
+    ImgPreviewComponent
   ]
 })
 export class SharedModule { }

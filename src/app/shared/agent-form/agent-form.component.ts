@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, OnChanges, Input, EventEmitter, SimpleChange } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './agent-form.component.html',
   styleUrls: ['./agent-form.component.scss']
 })
-export class AgentFormComponent implements OnInit {
+export class AgentFormComponent implements OnInit, OnChanges {
   @Output() formSubmit = new EventEmitter<{}>();
   @Input() formData?: any;
   @Input() isLoading = false;
@@ -18,38 +18,46 @@ export class AgentFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      name: new FormControl(this.formData?.name, [Validators.required, Validators.maxLength(45)]),
-      imgURL: new FormControl(this.formData?.imgURL, [Validators.required, Validators.maxLength(250)]),
-      role: new FormControl(this.formData?.role, [Validators.required, Validators.maxLength(45)]),
-      biography: new FormControl(this.formData?.biography, [Validators.required, Validators.maxLength(300)]),
+      name: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
+      imgURL: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      role: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
+      biography: new FormControl(null, [Validators.required, Validators.maxLength(300)]),
       abilities: new FormGroup({
         abilityQ: new FormGroup({
-          name: new FormControl(this.formData?.abilities[0]?.name),
-          description: new FormControl(this.formData?.abilities[0]?.description),
-          image: new FormControl(this.formData?.abilities[0]?.image),
-          videoURL: new FormControl(this.formData?.abilities[0]?.videoURL)
+          name: new FormControl(null),
+          description: new FormControl(null),
+          image: new FormControl(null),
+          videoURL: new FormControl(null)
         }),
         abilityE: new FormGroup({
-          name: new FormControl(this.formData?.abilities[1]?.name),
-          description: new FormControl(this.formData?.abilities[1]?.description),
-          image: new FormControl(this.formData?.abilities[1]?.image),
-          videoURL: new FormControl(this.formData?.abilities[1]?.videoURL)
+          name: new FormControl(null),
+          description: new FormControl(null),
+          image: new FormControl(null),
+          videoURL: new FormControl(null)
         }),
         abilityC: new FormGroup({
-          name: new FormControl(this.formData?.abilities[2]?.name),
-          description: new FormControl(this.formData?.abilities[2]?.description),
-          image: new FormControl(this.formData?.abilities[2]?.image),
-          videoURL: new FormControl(this.formData?.abilities[2]?.videoURL)
+          name: new FormControl(null),
+          description: new FormControl(null),
+          image: new FormControl(null),
+          videoURL: new FormControl(null)
         }),
         abilityX: new FormGroup({
-          name: new FormControl(this.formData?.abilities[3]?.name),
-          description: new FormControl(this.formData?.abilities[3]?.description),
-          image: new FormControl(this.formData?.abilities[3]?.image),
-          videoURL: new FormControl(this.formData?.abilities[3]?.videoURL)
+          name: new FormControl(null),
+          description: new FormControl(null),
+          image: new FormControl(null),
+          videoURL: new FormControl(null)
         })
       })
     });
 
+  }
+
+  ngOnChanges(changes: {formData: SimpleChange}): void {
+    if (changes?.formData?.currentValue) {
+      this.form.patchValue({
+        ...changes?.formData?.currentValue
+      });
+    }
   }
 
   handleSubmit(): void {

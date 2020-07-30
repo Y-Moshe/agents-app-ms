@@ -23,10 +23,7 @@ export class NewAgentComponent {
     this.agentsService.add(form).then(message => {
       this.setAlert('success', message);
     }).catch((err: HttpErrorResponse) => {
-      let msg = err.message;
-      if (err.error.error?.message) {
-        msg = err.error.error?.message;
-      }
+      const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
     }).finally(() => {

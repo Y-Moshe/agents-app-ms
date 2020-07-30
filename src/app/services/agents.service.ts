@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
@@ -29,5 +29,14 @@ export class AgentsService {
 
   delete(id: number): Promise<any> {
     return this.http.delete(api.concat('/', id.toString())).toPromise();
+  }
+
+  getRightErrMessage(error: HttpErrorResponse): string {
+      let msg = error.message;
+      if (error.error.error?.message) {
+        msg = error.error.error?.message;
+      }
+
+      return msg;
   }
 }
