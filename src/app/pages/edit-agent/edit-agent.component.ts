@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AgentsService } from 'src/app/services/agents.service';
+import { AgentsService } from '../../services/agents.service';
 
 @Component({
   selector: 'app-edit-agent',
@@ -11,10 +11,10 @@ import { AgentsService } from 'src/app/services/agents.service';
   styleUrls: ['./edit-agent.component.scss']
 })
 export class EditAgentComponent implements OnInit {
-  isLoading = false;
   id: number;
-  formData = null;
   message: string;
+  isLoading = false;
+  formData = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,9 +26,8 @@ export class EditAgentComponent implements OnInit {
     this.isLoading = true;
     this.id = +this.route.snapshot.params.id;
 
-    this.agentsService.getOne(this.id).then(res => {
-      console.log(res);
-      this.formData = res;
+    this.agentsService.getOne(this.id).then(response => {
+      this.formData = response;
 
     }).catch((err: HttpErrorResponse) => {
       const msg = this.agentsService.getRightErrMessage(err);

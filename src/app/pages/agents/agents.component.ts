@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AgentsService } from '../../services/agents.service';
+
 @Component({
   selector: 'app-agents',
   templateUrl: './agents.component.html',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private agentsService: AgentsService
+  ) { }
 
   ngOnInit(): void {
   }
