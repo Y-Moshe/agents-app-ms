@@ -7,8 +7,7 @@ import { AgentsService } from '../../services/agents.service';
 
 @Component({
   selector: 'app-edit-agent',
-  templateUrl: './edit-agent.component.html',
-  styleUrls: ['./edit-agent.component.scss']
+  templateUrl: './edit-agent.component.html'
 })
 export class EditAgentComponent implements OnInit {
   id: number;
@@ -24,12 +23,14 @@ export class EditAgentComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    // get id from the params url
     this.id = +this.route.snapshot.params.id;
 
     this.agentsService.getOne(this.id).then(response => {
+      // on success response
       this.formData = response;
-
     }).catch((err: HttpErrorResponse) => {
+      // on error response
       const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
@@ -43,9 +44,10 @@ export class EditAgentComponent implements OnInit {
     this.message = null;
 
     this.agentsService.edit(this.id, form).then(message => {
+      // on success response
       this.setAlert('success', message);
-
     }).catch((err: HttpErrorResponse) => {
+      // on error response
       const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
@@ -54,6 +56,11 @@ export class EditAgentComponent implements OnInit {
     });
   }
 
+  /**
+   * Displaying an alert message using MatSnackBar
+   * @param status 'success' or 'danger'
+   * @param message the message body
+   */
   private setAlert(status: 'success' | 'danger', message: string): void {
     this.snackBar.open(message, 'Close', {
       panelClass: [

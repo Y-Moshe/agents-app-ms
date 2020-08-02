@@ -8,8 +8,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-agents',
-  templateUrl: './agents.component.html',
-  styleUrls: ['./agents.component.scss']
+  templateUrl: './agents.component.html'
 })
 export class AgentsComponent implements OnInit {
   agents: IAgents[];
@@ -22,20 +21,24 @@ export class AgentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.isLoading = true;
+    this.isLoading = true;
 
-    // this.agentsService.getAll().then(response => {
-    //   this.agents = response;
-    // }).catch((error: HttpErrorResponse) => {
-    //   const msg = this.agentsService.getRightErrMessage(error);
+    this.agentsService.getAll().then(response => {
+      // on success response
+      this.agents = response;
+    }).catch((error: HttpErrorResponse) => {
+      // on error response
+      const msg = this.agentsService.getRightErrMessage(error);
 
-    //   this.setAlert('danger', msg);
-    // }).finally(() => {
-    //   this.isLoading = false;
-    // });
+      this.setAlert('danger', msg);
+    }).finally(() => {
+      this.isLoading = false;
+    });
   }
 
   handleDelete(data: {id: number, name: string}): void {
+    // opening a delete dialog
+    // answer is undefined or true
     this.dialog.open(DeleteDialogComponent, {
       width: '450px',
       height: 'auto',
@@ -48,6 +51,11 @@ export class AgentsComponent implements OnInit {
     });
   }
 
+  /**
+   * Displaying an alert message using MatSnackBar
+   * @param status 'success' or 'danger'
+   * @param message the message body
+   */
   private setAlert(status: 'success' | 'danger', message: string): void {
     this.snackBar.open(message, 'Close', {
       panelClass: [

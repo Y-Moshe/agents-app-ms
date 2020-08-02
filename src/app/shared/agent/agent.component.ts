@@ -1,20 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-agent',
-  templateUrl: './agent.component.html',
-  styleUrls: ['./agent.component.scss']
+  templateUrl: './agent.component.html'
 })
-export class AgentComponent implements OnInit {
-  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+export class AgentComponent {
+  @Output() delete: EventEmitter<{id: number, name: string}> = new EventEmitter<{id: number, name: string}>();
 
   @Input() id: number;
   @Input() name: string;
   @Input() imgURL: string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

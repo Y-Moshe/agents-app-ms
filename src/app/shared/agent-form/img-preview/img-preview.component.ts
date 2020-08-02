@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-img-preview',
-  templateUrl: './img-preview.component.html',
-  styleUrls: ['./img-preview.component.scss']
+  templateUrl: './img-preview.component.html'
 })
 export class ImgPreviewComponent {
   @Input() in: boolean;

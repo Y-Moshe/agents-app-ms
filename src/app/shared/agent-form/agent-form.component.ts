@@ -3,11 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-agent-form',
-  templateUrl: './agent-form.component.html',
-  styleUrls: ['./agent-form.component.scss']
+  templateUrl: './agent-form.component.html'
 })
 export class AgentFormComponent implements OnInit, OnChanges {
   @Output() formSubmit = new EventEmitter<{}>();
+
   @Input() formData?: any;
   @Input() isLoading = false;
 
@@ -53,7 +53,8 @@ export class AgentFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: {formData: SimpleChange}): void {
-    if (changes?.formData?.currentValue) {
+    // if formData property changes, update and fill the form with the new data
+    if (changes?.formData?.currentValue !== changes?.formData?.previousValue) {
       this.form.patchValue({
         ...changes?.formData?.currentValue
       });
@@ -65,17 +66,21 @@ export class AgentFormComponent implements OnInit, OnChanges {
       return;
     }
 
+    // preparing abilities to be transformed to an array from { abilityQ: Ability, abilityE: Ability...etc }
+    // will be [Ability, Ability, ...etc]
     const abilities = Object.keys(this.form.value.abilities).map(key => {
       return {
         ...this.form.value.abilities[key]
       };
     });
 
+    // making copy from the form.value object, and override abilities property
     const data = {
       ...this.form.value,
       abilities
     };
 
+    // emiting data change
     this.formSubmit.emit(data);
   }
 }

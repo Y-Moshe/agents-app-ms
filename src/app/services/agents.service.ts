@@ -38,10 +38,19 @@ export class AgentsService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Get all agents
+   * @returns Promise with all agents as array[]
+   */
   getAll(): Promise<IAgents[]> {
     return this.http.get(api.concat('/agents')).toPromise<any>();
   }
 
+  /**
+   * Fetch a specific agent from Database.
+   * @param id id of the agent
+   * @returns Promise with the agent object
+   */
   getOne(id: number): Promise<IAgent> {
     return this.http.get(api.concat('/', id.toString())).pipe(map(response => {
       // transfroming the abilities response object to the correct formData on agent-form component to be used.
@@ -51,6 +60,7 @@ export class AgentsService {
         // for abilities prop
         if (key === 'abilities') {
             const abilities = {};
+            // this is required
             const decodedAbilities = JSON.parse(response[key]) as [];
 
             decodedAbilities.forEach((ability: IAbility, i) => {
@@ -85,14 +95,29 @@ export class AgentsService {
     })).toPromise<any>();
   }
 
+  /**
+   * Adding new agent to the database
+   * @param data agent data
+   * @returns Promise with a success message
+   */
   add(data: any): Promise<string> {
     return this.http.post(api.concat('/agents'), data).toPromise<any>();
   }
 
+  /**
+   * Edits the data of the agent
+   * @param id id of the agent
+   * @param data agent data
+   * @returns Promise with a success message
+   */
   edit(id: number, data: any): Promise<string> {
     return this.http.patch(api.concat('/', id.toString()), data).toPromise<any>();
   }
 
+  /**
+   * Will delete agent from the database for the given agent "id"
+   * @returns Promise with a success message
+   */
   delete(id: number): Promise<string> {
     return this.http.delete(api.concat('/', id.toString())).toPromise<any>();
   }

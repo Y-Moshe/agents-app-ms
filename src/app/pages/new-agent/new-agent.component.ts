@@ -6,8 +6,7 @@ import { AgentsService } from '../../services/agents.service';
 
 @Component({
   selector: 'app-new-agent',
-  templateUrl: './new-agent.component.html',
-  styleUrls: ['./new-agent.component.scss']
+  templateUrl: './new-agent.component.html'
 })
 export class NewAgentComponent {
   isLoading = false;
@@ -21,8 +20,10 @@ export class NewAgentComponent {
     this.isLoading = true;
 
     this.agentsService.add(form).then(message => {
+      // on success response
       this.setAlert('success', message);
     }).catch((err: HttpErrorResponse) => {
+      // on error response
       const msg = this.agentsService.getRightErrMessage(err);
 
       this.setAlert('danger', msg);
@@ -31,6 +32,11 @@ export class NewAgentComponent {
     });
   }
 
+  /**
+   * Displaying an alert message using MatSnackBar
+   * @param status 'success' or 'danger'
+   * @param message the message body
+   */
   private setAlert(status: 'success' | 'danger', message: string): void {
     this.snackBar.open(message, 'Close', {
       panelClass: [
