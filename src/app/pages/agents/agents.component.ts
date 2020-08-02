@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
-import { AgentsService } from '../../services/agents.service';
+import { AgentsService, IAgents } from '../../services/agents.service';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-agents',
@@ -8,12 +12,50 @@ import { AgentsService } from '../../services/agents.service';
   styleUrls: ['./agents.component.scss']
 })
 export class AgentsComponent implements OnInit {
+  agents: IAgents[];
+  isLoading = false;
 
   constructor(
-    private agentsService: AgentsService
+    private agentsService: AgentsService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    // this.isLoading = true;
+
+    // this.agentsService.getAll().then(response => {
+    //   this.agents = response;
+    // }).catch((error: HttpErrorResponse) => {
+    //   const msg = this.agentsService.getRightErrMessage(error);
+
+    //   this.setAlert('danger', msg);
+    // }).finally(() => {
+    //   this.isLoading = false;
+    // });
+  }
+
+  handleDelete(data: {id: number, name: string}): void {
+    this.dialog.open(DeleteDialogComponent, {
+      width: '450px',
+      height: 'auto',
+      data
+    }).afterClosed().subscribe(answer => {
+      if (answer) {
+        console.log('deleted');
+        // make delete http request
+      }
+    });
+  }
+
+  private setAlert(status: 'success' | 'danger', message: string): void {
+    this.snackBar.open(message, 'Close', {
+      panelClass: [
+        'text-white',
+        status === 'success' ? 'bg-success' : 'bg-danger'
+      ],
+      duration: 3000
+    });
   }
 
 }

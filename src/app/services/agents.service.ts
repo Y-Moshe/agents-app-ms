@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 export interface IAgents {
+  id: number;
   name: string;
   imgURL: string;
 }
@@ -16,7 +17,9 @@ export interface IAbility {
   videoURL: string;
 }
 
-export interface IAgent extends IAgents {
+export interface IAgent {
+  name: string;
+  imgURL: string;
   role: string;
   biography: string;
   abilities: {
@@ -35,7 +38,7 @@ export class AgentsService {
     private http: HttpClient
   ) { }
 
-  getAll(): Promise<IAgents> {
+  getAll(): Promise<IAgents[]> {
     return this.http.get(api.concat('/agents')).toPromise<any>();
   }
 

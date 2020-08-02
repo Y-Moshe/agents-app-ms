@@ -5,20 +5,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AgentFormComponent } from './agent-form/agent-form.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ImgPreviewComponent } from './agent-form/img-preview/img-preview.component';
+import { AgentComponent } from './agent/agent.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
     AgentFormComponent,
-    ImgPreviewComponent
+    ImgPreviewComponent,
+    AgentComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   exports: [
     AgentFormComponent,
-    ImgPreviewComponent
+    ImgPreviewComponent,
+    AgentComponent
   ]
 })
 export class SharedModule { }

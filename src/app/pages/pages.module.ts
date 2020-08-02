@@ -6,17 +6,24 @@ import { NewAgentComponent } from './new-agent/new-agent.component';
 import { EditAgentComponent } from './edit-agent/edit-agent.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { DeleteDialogComponent } from './agents/delete-dialog/delete-dialog.component';
+import { AngularMaterialModule } from '../angular-material.module';
 
 @NgModule({
   declarations: [
     AgentsComponent,
     EditAgentComponent,
-    NewAgentComponent
+    NewAgentComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    AngularMaterialModule
+  ],
+  entryComponents: [
+    DeleteDialogComponent
   ]
 })
 export class PagesModule { }
