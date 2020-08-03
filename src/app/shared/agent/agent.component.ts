@@ -10,4 +10,5 @@ export class AgentComponent {
   @Input() id: number;
   @Input() name: string;
   @Input() imgURL: string;
+  @Input() isLoading = false;
 }

@@ -13,12 +13,12 @@ export interface ILink {
 export class AppComponent {
   links: ILink[] = [
     {
-      name: 'Agents',
-      url: '/agents'
+      name: 'סוכן חדש',
+      url: '/agents/new'
     },
     {
-      name: 'New Agent',
-      url: '/agents/new'
+      name: 'סוכנים',
+      url: '/agents'
     }
   ];
 }

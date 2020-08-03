@@ -1,38 +1,15 @@
-<div class="container-fluid no-gutters m-3 d-flex flex-wrap justify-content-around">
-  <app-agent
-    id="4"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
-    (delete)="handleDelete($event)">
-  </app-agent>
-  <app-agent
-    id="26"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
-    (delete)="handleDelete($event)">
-  </app-agent>
-  <app-agent
-    id="27"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
-    (delete)="handleDelete($event)">
-  </app-agent>
-  <app-agent
-    id="28"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
-    (delete)="handleDelete($event)">
-  </app-agent>
-  <app-agent
-    id="88"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
-    (delete)="handleDelete($event)">
-  </app-agent>
-  <app-agent
-    id="43"
-    name="Jett"
-    imgURL="http://playvalorant.co.il/wp-content/uploads/2020/06/jett.png"
+<div
+  class="container-fluid no-gutters m-3 d-flex flex-wrap justify-content-around"
+  [@listAgents]="agents.length">
+  <mat-progress-bar
+    *ngIf="isLoading || isDeleting"
+    mode="query">
+  </mat-progress-bar>
+  <app-agent *ngFor="let agent of agents"
+    [id]="agent.id"
+    [name]="agent.name"
+    [imgURL]="agent.imgURL"
+    [isLoading]="isDeleting"
     (delete)="handleDelete($event)">
   </app-agent>
 </div>

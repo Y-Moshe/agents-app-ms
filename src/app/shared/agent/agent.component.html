@@ -3,7 +3,7 @@
     <h3 class="text-primary"> {{name}} </h3>
     <span class="text-secondary"> ID: {{id}} </span>
   </div>
-  <a [routerLink]="['edit/', id]">
+  <a routerLink="edit/{{id}}">
     <div class="card-body">
       <img
         [src]="imgURL"
@@ -12,7 +12,15 @@
     </div>
   </a>
   <div class="card-footer d-flex justify-content-between">
+    <a
+      [disabled]="isLoading"
+      routerLink="edit/{{id}}"
+      mat-raised-button
+      color="primary">
+      עדכן
+    </a>
     <button
+      [disabled]="isLoading"
       type="button"
       class="text-white"
       (click)="delete.emit({id: id,name: name})"
@@ -20,11 +28,5 @@
       color="warn">
       <img src="../../../assets/trash.svg" alt="trash">
     </button>
-    <a
-      [routerLink]="['edit/' + id.toString()]"
-      mat-raised-button
-      color="primary">
-      Edit
-    </a>
   </div>
 </div>

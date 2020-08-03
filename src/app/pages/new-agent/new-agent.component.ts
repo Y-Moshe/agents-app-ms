@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 import { AgentsService } from '../../services/agents.service';
 
@@ -13,6 +14,7 @@ export class NewAgentComponent {
 
   constructor(
     private agentsService: AgentsService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
@@ -22,6 +24,7 @@ export class NewAgentComponent {
     this.agentsService.add(form).then(message => {
       // on success response
       this.setAlert('success', message);
+      this.router.navigate(['/']);
     }).catch((err: HttpErrorResponse) => {
       // on error response
       const msg = this.agentsService.getRightErrMessage(err);

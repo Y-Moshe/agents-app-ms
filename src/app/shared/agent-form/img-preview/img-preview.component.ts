@@ -7,6 +7,8 @@ import { Component, Input } from '@angular/core';
 export class ImgPreviewComponent {
   @Input() in: boolean;
   @Input() src: string;
-  @Input() width: number;
+  /**
+   * The height of the image and it's container
+   */
   @Input() height: number;
 }

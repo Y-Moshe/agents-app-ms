@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,7 +18,8 @@ export class EditAgentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private agentsService: AgentsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class EditAgentComponent implements OnInit {
     this.agentsService.edit(this.id, form).then(message => {
       // on success response
       this.setAlert('success', message);
+      this.router.navigate(['/']);
     }).catch((err: HttpErrorResponse) => {
       // on error response
       const msg = this.agentsService.getRightErrMessage(err);

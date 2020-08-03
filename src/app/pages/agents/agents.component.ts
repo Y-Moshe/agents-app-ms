@@ -2,17 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { transition, animate, style, trigger, query, stagger } from '@angular/animations';
 
 import { AgentsService, IAgents } from '../../services/agents.service';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-agents',
-  templateUrl: './agents.component.html'
+  templateUrl: './agents.component.html',
+  animations: [
+    trigger('listAgents', [
+      transition('* <=> *', [
+        // display (agents) animations
+        query(':enter', [
+          style({
+            opacity: 0.5,
+            transform: 'scale(0.5)',
+          }),
+          stagger(100,
+            animate(300, style({
+                opacity: 1,
+                transform: 'none'
+            }))
+          )
+        ], { optional: true }),
+        // delete animations
+        query(':leave',
+          animate(300, style({
+            opacity: 0.5,
+            transform: 'scale(0.3)'
+          }))
+        , { optional: true })
+      ])
+    ])
+  ]
 })
 export class AgentsComponent implements OnInit {
-  agents: IAgents[];
+  agents: IAgents[] = [];
   isLoading = false;
+  isDeleting = false;
 
   constructor(
     private agentsService: AgentsService,
@@ -45,8 +73,22 @@ export class AgentsComponent implements OnInit {
       data
     }).afterClosed().subscribe(answer => {
       if (answer) {
-        console.log('deleted');
-        // make delete http request
+        this.isDeleting = true;
+
+        this.agentsService.delete(data.id).then(message => {
+          // on success response
+          this.setAlert('success', message);
+
+          const index = this.agents.findIndex(a => a.id === data.id);
+          this.agents.splice(index, 1);
+        }).catch((error: HttpErrorResponse) => {
+          // on error response
+          const msg = this.agentsService.getRightErrMessage(error);
+
+          this.setAlert('danger', msg);
+        }).finally(() => {
+          this.isDeleting = false;
+        });
       }
     });
   }

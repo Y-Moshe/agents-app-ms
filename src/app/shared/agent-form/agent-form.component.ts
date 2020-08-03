@@ -1,9 +1,24 @@
 import { Component, OnInit, Output, OnChanges, Input, EventEmitter, SimpleChange } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-agent-form',
-  templateUrl: './agent-form.component.html'
+  templateUrl: './agent-form.component.html',
+  animations: [
+    trigger('in', [
+      transition('* <=> *', [
+        style({
+          opacity: 0.5,
+          transform: 'scale(0.7)'
+        }),
+        animate(500, style({
+          opacity: 1,
+          transform: 'none'
+        }))
+      ])
+    ])
+  ]
 })
 export class AgentFormComponent implements OnInit, OnChanges {
   @Output() formSubmit = new EventEmitter<{}>();
@@ -54,7 +69,7 @@ export class AgentFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: {formData: SimpleChange}): void {
     // if formData property changes, update and fill the form with the new data
-    if (changes?.formData?.currentValue !== changes?.formData?.previousValue) {
+    if (this.form && changes?.formData?.currentValue !== changes?.formData?.previousValue) {
       this.form.patchValue({
         ...changes?.formData?.currentValue
       });
