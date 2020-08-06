@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, OnChanges, Input, EventEmitter, SimpleChange } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-agent-form',
@@ -21,9 +21,20 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ]
 })
 export class AgentFormComponent implements OnInit, OnChanges {
-  @Output() formSubmit = new EventEmitter<{}>();
+  /**
+   * Will omit whenever the submit button clicked.
+   * With a form data object, transformed and rdy to be sent.
+   */
+  @Output() formSubmit = new EventEmitter<any>();
 
+  /**
+   * (optional) the form data.
+   * the object must be identical to the form.value object.
+   */
   @Input() formData?: any;
+  /**
+   * Used to disable/enable the form buttons.
+   */
   @Input() isLoading = false;
 
   form: FormGroup;
@@ -32,6 +43,7 @@ export class AgentFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
 
+    // initialazing the form with all null value
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
       imgURL: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -82,7 +94,7 @@ export class AgentFormComponent implements OnInit, OnChanges {
     }
 
     // preparing abilities to be transformed to an array from { abilityQ: Ability, abilityE: Ability...etc }
-    // will be [Ability, Ability, ...etc]
+    // To [IAbility, IAbility, ...etc]
     const abilities = Object.keys(this.form.value.abilities).map(key => {
       return {
         ...this.form.value.abilities[key]
@@ -95,7 +107,6 @@ export class AgentFormComponent implements OnInit, OnChanges {
       abilities
     };
 
-    // emiting data change
     this.formSubmit.emit(data);
   }
 }

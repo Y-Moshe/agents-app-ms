@@ -64,6 +64,8 @@ export class AgentsService {
             const decodedAbilities = JSON.parse(response[key]) as [];
 
             decodedAbilities.forEach((ability: IAbility, i) => {
+              // the formControlName used for the agent-form.
+              // will be concat with one of Character
               let ctrlName = 'ability';
               switch (i) {
                 case 0:
@@ -122,6 +124,13 @@ export class AgentsService {
     return this.http.delete(api.concat('/', id.toString())).toPromise<any>();
   }
 
+  /**
+   * Will try to get a meaningful text message from that object.
+   * if meaningful message was not found, will return the default
+   * from the error object.
+   * @returns the message as string
+   * @param error the error response object
+   */
   getRightErrMessage(error: HttpErrorResponse): string {
       let msg = error.message;
       if (error.error?.message) {
