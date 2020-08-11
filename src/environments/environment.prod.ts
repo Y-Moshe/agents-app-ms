@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  serviceAPI: 'http://playvalorant.co.il/wp-json/agents-api/v1'
+  // serviceAPI: 'http://playvalorant.co.il/wp-json/agents-api/v1'
+  serviceAPI: 'http://localhost/index.php/wp-json/agents-api/v1'
 };
