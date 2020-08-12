@@ -7,12 +7,14 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { ImgPreviewComponent } from './agent-form/img-preview/img-preview.component';
 import { AgentComponent } from './agent/agent.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { UrlErrorMsgComponent } from './agent-form/url-error-msg/url-error-msg.component';
 
 @NgModule({
   declarations: [
     AgentFormComponent,
     ImgPreviewComponent,
-    AgentComponent
+    AgentComponent,
+    UrlErrorMsgComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,6 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   exports: [
     AgentFormComponent,
-    ImgPreviewComponent,
     AgentComponent
   ]
 })

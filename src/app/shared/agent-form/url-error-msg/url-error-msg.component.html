@@ -1,0 +1,10 @@
+<!-- mr-5 looks ugly on development mode, but on production with wordpress, its ok -->
+<mat-error
+  *ngIf="in"
+  class="text-right m-0 p-0 mr-5">
+  <p>לינק שגוי, וודא עומד שהוא בדרישות הבאות:</p>
+  <ul>
+    <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+    <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+  </ul>
+</mat-error>

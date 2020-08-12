@@ -28,15 +28,8 @@
       [in]="form.get('imgURL').value && form.get('imgURL').valid"
       [src]="form.get('imgURL').value">
     </app-img-preview>
-    <mat-error
-      *ngIf="form.get('imgURL').touched && form.get('imgURL').invalid"
-      class="text-right">
-      <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
-      <ul>
-        <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
-        <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
-      </ul>
-    </mat-error>
+    <app-url-error-msg [in]="form.get('imgURL').touched && form.get('imgURL').invalid">
+    </app-url-error-msg>
     <!-- Role -->
     <mat-form-field class="w-100">
       <input
@@ -91,15 +84,8 @@
             [in]="form.get('abilities.abilityQ.image').value && form.get('abilities.abilityQ.image').valid"
             [src]="form.get('abilities.abilityQ.image').value">
           </app-img-preview>
-          <mat-error
-            *ngIf="form.get('abilities.abilityQ.image').touched && form.get('abilities.abilityQ.image').invalid"
-            class="text-right">
-            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
-            <ul>
-              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
-              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
-            </ul>
-          </mat-error>
+          <app-url-error-msg [in]="form.get('abilities.abilityQ.image').touched && form.get('abilities.abilityQ.image').invalid">
+          </app-url-error-msg>
           <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
@@ -138,15 +124,8 @@
             [in]="form.get('abilities.abilityE.image').value && form.get('abilities.abilityE.image').valid"
             [src]="form.get('abilities.abilityE.image').value">
           </app-img-preview>
-          <mat-error
-            *ngIf="form.get('abilities.abilityE.image').touched && form.get('abilities.abilityE.image').invalid"
-            class="text-right">
-            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
-            <ul>
-              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
-              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
-            </ul>
-          </mat-error>
+          <app-url-error-msg [in]="form.get('abilities.abilityE.image').touched && form.get('abilities.abilityE.image').invalid">
+          </app-url-error-msg>
           <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
@@ -188,15 +167,8 @@
             [in]="form.get('abilities.abilityC.image').value && form.get('abilities.abilityC.image').valid"
             [src]="form.get('abilities.abilityC.image').value">
           </app-img-preview>
-          <mat-error
-            *ngIf="form.get('abilities.abilityC.image').touched && form.get('abilities.abilityC.image').invalid"
-            class="text-right">
-            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
-            <ul>
-              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
-              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
-            </ul>
-          </mat-error>
+          <app-url-error-msg [in]="form.get('abilities.abilityC.image').touched && form.get('abilities.abilityC.image').invalid">
+          </app-url-error-msg>
           <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
@@ -235,15 +207,8 @@
             [in]="form.get('abilities.abilityX.image').value && form.get('abilities.abilityX.image').valid"
             [src]="form.get('abilities.abilityX.image').value">
           </app-img-preview>
-          <mat-error
-            *ngIf="form.get('abilities.abilityX.image').touched && form.get('abilities.abilityX.image').invalid"
-            class="text-right">
-            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
-            <ul>
-              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
-              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
-            </ul>
-          </mat-error>
+          <app-url-error-msg [in]="form.get('abilities.abilityX.image').touched && form.get('abilities.abilityX.image').invalid">
+          </app-url-error-msg>
           <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
