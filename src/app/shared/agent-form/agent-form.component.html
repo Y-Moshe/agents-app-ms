@@ -4,6 +4,7 @@
     style="font-size: 16px !important;"
     (ngSubmit)="handleSubmit()"
     [formGroup]="form">
+    <!-- Name -->
     <mat-form-field class="w-100">
       <input
         formControlName="name"
@@ -12,6 +13,7 @@
         matInput
         placeholder="שם">
     </mat-form-field>
+    <!-- IMG URL -->
     <mat-form-field class="w-100">
       <input
         formControlName="imgURL"
@@ -20,11 +22,22 @@
         matInput
         placeholder="תמונה (לינק בלבד)">
     </mat-form-field>
+    <!-- IMG Preview -->
     <app-img-preview
       [height]="200"
-      [in]="form.get('imgURL').value"
+      [in]="form.get('imgURL').value && form.get('imgURL').valid"
       [src]="form.get('imgURL').value">
     </app-img-preview>
+    <mat-error
+      *ngIf="form.get('imgURL').touched && form.get('imgURL').invalid"
+      class="text-right">
+      <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
+      <ul>
+        <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+        <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+      </ul>
+    </mat-error>
+    <!-- Role -->
     <mat-form-field class="w-100">
       <input
         formControlName="role"
@@ -33,6 +46,7 @@
         matInput
         placeholder="תפקיד">
     </mat-form-field>
+    <!-- Biography -->
     <mat-form-field class="w-100">
       <input
         formControlName="biography"
@@ -41,36 +55,52 @@
         matInput
         placeholder="ביוגרפיה">
     </mat-form-field>
+    <!-- Abilities -->
     <div class="container"
         formGroupName="abilities">
       <h3 class="text-primary text-right">יכולות</h3>
       <hr />
       <div class="row">
+        <!-- The Q Abililty -->
         <div class="col-xs-12 col-sm-6"
             formGroupName="abilityQ">
+          <!-- Name -->
           <mat-form-field class="w-100">
             <input
               formControlName="name"
               matInput
               placeholder="יכולת ה- Q">
           </mat-form-field>
+          <!-- Description -->
           <mat-form-field class="w-100">
             <input
               formControlName="description"
               matInput
               placeholder="תיאור">
           </mat-form-field>
+          <!-- IMG URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="image"
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <!-- IMG Preview -->
           <app-img-preview
             [height]="100"
-            [in]="form.get('abilities.abilityQ.image').value"
+            [in]="form.get('abilities.abilityQ.image').value && form.get('abilities.abilityQ.image').valid"
             [src]="form.get('abilities.abilityQ.image').value">
           </app-img-preview>
+          <mat-error
+            *ngIf="form.get('abilities.abilityQ.image').touched && form.get('abilities.abilityQ.image').invalid"
+            class="text-right">
+            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
+            <ul>
+              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+            </ul>
+          </mat-error>
+          <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -78,31 +108,46 @@
               placeholder="תסריט MP4 (לינק בלבד)">
           </mat-form-field>
         </div>
+        <!-- The E Abililty -->
         <div class="col-xs-12 col-sm-6"
             formGroupName="abilityE">
+          <!-- Name -->
           <mat-form-field class="w-100">
             <input
               formControlName="name"
               matInput
               placeholder="יכולת ה- E">
           </mat-form-field>
+          <!-- Description -->
           <mat-form-field class="w-100">
             <input
               formControlName="description"
               matInput
               placeholder="תיאור">
           </mat-form-field>
+          <!-- IMG URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="image"
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <!-- IMG Preview -->
           <app-img-preview
             [height]="100"
-            [in]="form.get('abilities.abilityE.image').value"
+            [in]="form.get('abilities.abilityE.image').value && form.get('abilities.abilityE.image').valid"
             [src]="form.get('abilities.abilityE.image').value">
           </app-img-preview>
+          <mat-error
+            *ngIf="form.get('abilities.abilityE.image').touched && form.get('abilities.abilityE.image').invalid"
+            class="text-right">
+            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
+            <ul>
+              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+            </ul>
+          </mat-error>
+          <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -113,31 +158,46 @@
       </div>
       <hr />
       <div class="row">
+        <!-- The C Abililty -->
         <div class="col-xs-12 col-sm-6"
             formGroupName="abilityC">
+          <!-- Name -->
           <mat-form-field class="w-100">
             <input
               formControlName="name"
               matInput
               placeholder="יכולת ה- C">
           </mat-form-field>
+          <!-- Description -->
           <mat-form-field class="w-100">
             <input
               formControlName="description"
               matInput
               placeholder="תיאור">
           </mat-form-field>
+          <!-- IMG URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="image"
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <!-- IMG Preview -->
           <app-img-preview
             [height]="100"
-            [in]="form.get('abilities.abilityC.image').value"
+            [in]="form.get('abilities.abilityC.image').value && form.get('abilities.abilityC.image').valid"
             [src]="form.get('abilities.abilityC.image').value">
           </app-img-preview>
+          <mat-error
+            *ngIf="form.get('abilities.abilityC.image').touched && form.get('abilities.abilityC.image').invalid"
+            class="text-right">
+            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
+            <ul>
+              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+            </ul>
+          </mat-error>
+          <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"
@@ -145,31 +205,46 @@
               placeholder="תסריט MP4 (לינק בלבד)">
           </mat-form-field>
         </div>
+        <!-- The X Abililty -->
         <div class="col-xs-12 col-sm-6"
             formGroupName="abilityX">
+          <!-- Name -->
           <mat-form-field class="w-100">
             <input
               formControlName="name"
               matInput
               placeholder="יכולת ה- X">
           </mat-form-field>
+          <!-- Description -->
           <mat-form-field class="w-100">
             <input
               formControlName="description"
               matInput
               placeholder="תיאור">
           </mat-form-field>
+          <!-- IMG URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="image"
               matInput
               placeholder="תמונה (לינק בלבד)">
           </mat-form-field>
+          <!-- IMG Preview -->
           <app-img-preview
             [height]="100"
-            [in]="form.get('abilities.abilityX.image').value"
+            [in]="form.get('abilities.abilityX.image').value && form.get('abilities.abilityX.image').valid"
             [src]="form.get('abilities.abilityX.image').value">
           </app-img-preview>
+          <mat-error
+            *ngIf="form.get('abilities.abilityX.image').touched && form.get('abilities.abilityX.image').invalid"
+            class="text-right">
+            <p>לינק שגוי, וודא עומד בדרישות הבאות:</p>
+            <ul>
+              <li>מתחיל ב- http(s)://playvalorant.co.il/wp-content/uploads</li>
+              <li>מסתיים ב- (.png | .jpg | .jpeg)</li>
+            </ul>
+          </mat-error>
+          <!-- Video URL -->
           <mat-form-field class="w-100">
             <input
               formControlName="videoURL"

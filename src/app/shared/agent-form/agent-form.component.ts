@@ -46,32 +46,32 @@ export class AgentFormComponent implements OnInit, OnChanges {
     // initialazing the form with all null value
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
-      imgURL: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      imgURL: new FormControl(null, [Validators.required, Validators.maxLength(250), this.validateURL]),
       role: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
       biography: new FormControl(null, [Validators.required, Validators.maxLength(300)]),
       abilities: new FormGroup({
         abilityQ: new FormGroup({
           name: new FormControl(null),
           description: new FormControl(null),
-          image: new FormControl(null),
+          image: new FormControl(null, this.validateURL),
           videoURL: new FormControl(null)
         }),
         abilityE: new FormGroup({
           name: new FormControl(null),
           description: new FormControl(null),
-          image: new FormControl(null),
+          image: new FormControl(null, this.validateURL),
           videoURL: new FormControl(null)
         }),
         abilityC: new FormGroup({
           name: new FormControl(null),
           description: new FormControl(null),
-          image: new FormControl(null),
+          image: new FormControl(null, this.validateURL),
           videoURL: new FormControl(null)
         }),
         abilityX: new FormGroup({
           name: new FormControl(null),
           description: new FormControl(null),
-          image: new FormControl(null),
+          image: new FormControl(null, this.validateURL),
           videoURL: new FormControl(null)
         })
       })
@@ -108,5 +108,25 @@ export class AgentFormComponent implements OnInit, OnChanges {
     };
 
     this.formSubmit.emit(data);
+  }
+
+  /**
+   * Will validate the entered url.
+   * url must start with: http(s)://playvalorant.co.il/wp-content/uploads/...... must end with (.png | .jpg | .jpeg)!
+   * @param control the FormControl Object
+   */
+  private validateURL(control: FormControl): { [key: string]: any } {
+    if (!control.value) {
+      return null;
+    }
+
+    const regex = new RegExp(/(http(s?):)\/\/playvalorant.co.il\/wp-content\/uploads\/.*\.(?:jpg|jpeg|png)/gi);
+    if (regex.test(control.value)) {
+      return null;
+    }
+
+    return {
+      url: true
+    };
   }
 }
