@@ -25,7 +25,9 @@ import { SharedModule } from './shared/shared.module';
   ],
   providers: [
     {
-      // this is required to work with wordpress
+      // this is required to work with wordpress.
+      // for development set: '/index.php/agents/management'
+      // for production set: /agents/management'
       provide: APP_BASE_HREF, useValue: '/index.php/agents/management'
     }
   ],
