@@ -1,23 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-export interface ILink {
-  name: string;
-  url: string;
-}
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-  links: ILink[] = [
-    {
-      name: 'סוכן חדש',
-      url: '/agents/new'
-    },
-    {
-      name: 'סוכנים',
-      url: '/agents'
-    }
-  ];
+export class AppComponent implements OnInit {
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    // load information about user
+    this.authService.loadData();
+  }
 }

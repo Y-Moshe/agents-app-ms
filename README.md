@@ -1,10 +1,11 @@
+## Before productions build and deployment!
+
+Update basename on "app.module.ts", required!
+and enviroment.prod.ts!
+
 # AgentsAppMs
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
-
-## Before deployment
-
-Update basename on "app.module.ts", required!
 
 ## Development server
 

@@ -1,15 +1,48 @@
 <nav class="shadow-sm">
   <ul class="nav">
-    <li
-      class="nav-item"
-      *ngFor="let link of links">
+    <li class="nav-item">
+      <a
+        class="nav-link link"
+        routerLinkActive="active"
+        routerLink="/agents/new">
+        סוכן חדש
+      </a>
+    </li>
+    <li class="nav-item">
       <a
         class="nav-link link"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="link.url">
-        {{link.name}}
+        routerLink="/agents">
+        סוכנים
       </a>
+    </li>
+
+    <!-- logout button -->
+    <li
+      class="nav-item"
+      *ngIf="user?.user_display_name">
+      <button
+        title="התנתק"
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="handleLogout()">
+        {{user.user_display_name}}
+      </button>
+    </li>
+
+    <!-- login button -->
+    <li
+      class="nav-item"
+      *ngIf="!user">
+      <button
+        mat-button
+        class="text-white"
+        type="button"
+        (click)="handleLogin()">
+        התחבר
+      </button>
     </li>
   </ul>
 </nav>

@@ -1,0 +1,43 @@
+<div class="container">
+  <h2 mat-dialog-title class="text-primary text-right">התחברות</h2>
+  <hr />
+  <form
+    #form="ngForm"
+    (ngSubmit)="handleSubmit(form)">
+
+    <mat-dialog-content class="text-right" style="font-size: 16px;" dir="rtl">
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          ngModel
+          name="username"
+          required
+          placeholder="שם משתמש:">
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input
+          matInput
+          ngModel
+          name="password"
+          required
+          type="password"
+          placeholder="סיסמא:">
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="justify-content-between">
+      <button
+        type="submit"
+        mat-button
+        color="warn">
+        התחבר
+      </button>
+      <button
+        type="button"
+        mat-button
+        mat-dialog-close>
+        לא
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

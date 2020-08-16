@@ -25,6 +25,10 @@ export class AgentComponent {
    */
   @Input() imgURL: string;
   /**
+   * Agent locke state
+   */
+  @Input() locked: boolean;
+  /**
    * disable/enable conditionally the buttons
    */
   @Input() isLoading = false;

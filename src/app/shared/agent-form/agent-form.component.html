@@ -220,6 +220,7 @@
       </div>
     </div>
 
+    <!-- spinner -->
     <div *ngIf="isLoading" class="d-flex">
       <div
         class="spinner-border m-auto"
@@ -227,15 +228,25 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+
+    <!-- actions / buttons -->
     <div *ngIf="!isLoading" class="d-flex justify-content-between">
       <button
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || form.value.locked && !user?.isLevel10"
         mat-raised-button
         color="warn"
         class="w-25"
         type="reset">אפס הכל</button>
+      <!-- lock trigger, available only for super admin lvl 10 -->
+      <mat-slide-toggle
+        *ngIf="user && user.isLevel10"
+        color="primary"
+        [checked]="!form.get('locked').value"
+        (change)="handleSlideChange($event)">
+        {{ !form.get('locked').value ? 'פתוח' : 'נעול' }}
+      </mat-slide-toggle>
       <button
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || form.value.locked && !user?.isLevel10"
         mat-raised-button
         class="w-25"
         type="submit">שמור</button>

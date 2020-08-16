@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serviceAPI: 'http://localhost/index.php/wp-json/agents-api/v1'
+  agentsAPI: 'http://localhost/index.php/wp-json/agents-api/v1',
+  authAPI: 'http://localhost/index.php/wp-json/jwt-auth/v1'
 };
 
 /*

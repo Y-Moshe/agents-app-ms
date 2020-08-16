@@ -4,10 +4,11 @@ import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-export interface IAgents {
+export interface IAgentCard {
   id: number;
   name: string;
   imgURL: string;
+  locked: boolean;
 }
 
 export interface IAbility {
@@ -28,9 +29,10 @@ export interface IAgent {
     abilityC: IAbility
     abilityX: IAbility
   };
+  locked: boolean;
 }
 
-const api = environment.serviceAPI;
+const api = environment.agentsAPI;
 
 @Injectable({providedIn: 'root'})
 export class AgentsService {
@@ -42,8 +44,15 @@ export class AgentsService {
    * Get all agents
    * @returns Promise with all agents as array[]
    */
-  getAll(): Promise<IAgents[]> {
-    return this.http.get(api.concat('/agents')).toPromise<any>();
+  getAll(): Promise<IAgentCard[]> {
+    return this.http.get(api.concat('/agents?for=ms')).pipe(map((response: IAgentCard[]) => {
+      return response.map(agentData => {
+        return {
+          ...agentData,
+          locked: Boolean(+agentData.locked)
+        };
+      });
+    })).toPromise();
   }
 
   /**
@@ -57,6 +66,11 @@ export class AgentsService {
       const form = {};
       // looping all response props ('name', 'imgURL'... etc)
       Object.keys(response).forEach(key => {
+        // for locked prop
+        if (key === 'locked') {
+          form[key] = Boolean(+response[key]);
+          return;
+        }
         // for abilities prop
         if (key === 'abilities') {
             const abilities = {};

@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { transition, animate, style, trigger, query, stagger } from '@angular/animations';
 
-import { AgentsService, IAgents } from '../../services/agents.service';
+import { AgentsService, IAgentCard } from '../../services/agents.service';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
@@ -38,7 +38,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
   ]
 })
 export class AgentsComponent implements OnInit {
-  agents: IAgents[] = [];
+  agents: IAgentCard[] = [];
   isLoading = false;
   isDeleting = false;
 
